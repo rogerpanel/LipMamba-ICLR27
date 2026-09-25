@@ -1,0 +1,35 @@
+# Large-scale pre-training on The Pile / SlimPajama mix.
+seed: 42
+
+model:
+  variant: lipmamba_370m
+
+dataset:
+  name: the_pile
+  block_size: 2048
+  batch_size: 8
+  num_workers: 8
+  token_path: data_cache/pile_train.bin
+  val_token_path: data_cache/pile_val.bin
+
+trainer:
+  max_steps: 1000000
+  warmup_steps: 10000
+  lr: 1.5e-4
+  weight_decay: 0.1
+  grad_clip: 1.0
+  epsilon_train: 0.18
+  log_every: 200
+  eval_every: 20000
+  save_every: 20000
+  out_dir: runs/lipmamba_pretrain
+  use_margin_objective: false
+  use_attack: null
+
+pac_bayes:
+  delta: 0.05
+  sigma_post: 0.05
+  sigma_prior: 0.10
+  epsilon_train: 0.18
+  beta: 0.1
+  n_train: 1000000

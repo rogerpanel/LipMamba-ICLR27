@@ -1,0 +1,17 @@
+# Baseline presets for Table 1 / Figure 3 (see lipmamba.baselines.preset).
+# All share data, seeds {42,137,2026}, optimiser and steps with LipMamba.
+unconstrained_mamba:
+  model: {spectral_norm: false, clamp_delta: false, reparam_eigen: false, gloro_head: false}
+  trainer: {use_margin_objective: false}
+gloro_mamba:                       # like-for-like certification baseline (head only)
+  model: {spectral_norm: false, clamp_delta: false, reparam_eigen: false, gloro_head: true}
+  trainer: {use_margin_objective: true, lipschitz_mode: local}
+naive_sn_mamba:                    # spectral norm on every matrix (Fig. 3 "Naive SN")
+  model: {spectral_norm: true, sn_in_proj: true}
+lipmamba_arch:
+  model: {}
+randomized_smoothing:              # independent certification baseline (Cohen et al. 2019)
+  sigma: 0.25
+  n0: 64
+  n: 512
+  alpha: 0.001

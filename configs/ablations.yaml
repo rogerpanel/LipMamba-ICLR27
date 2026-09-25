@@ -1,0 +1,21 @@
+# Ablation presets for Table 3 — each file overrides configs/lipmamba_130m.yaml.
+# Usage:  python scripts/train.py --config configs/lipmamba_130m.yaml --override configs/ablations/no_clamp.yaml
+#
+#   no_sn.yaml        w/o spectral norm on W_B, W_C (and W_Δ, W_out)
+#   no_clamp.yaml     w/o step clamp (vanilla softplus Δ_t; Δ_min = 0 ⇒ Lemma 1 fails)
+#   free_A.yaml       w/o eigenvalue reparameterisation (A = −exp(a_log))
+#   no_gloro.yaml     w/o GloRo head (plain linear head, no margin term)
+#   no_pacbayes.yaml  β = 0 (no complexity term)
+#   no_adv.yaml       clean cross-entropy only (no margin / attack)
+#   prior_N01.yaml    data-independent prior N(0, I)
+#   dmax_{0.25,1.0,2.0}.yaml   Δ_max sweep
+no_sn:        {model: {spectral_norm: false}}
+no_clamp:     {model: {clamp_delta: false}}
+free_A:       {model: {reparam_eigen: false}}
+no_gloro:     {model: {gloro_head: false}, trainer: {use_margin_objective: false}}
+no_pacbayes:  {pac_bayes: {beta: 0.0}}
+no_adv:       {trainer: {use_margin_objective: false, use_attack: null}}
+prior_N01:    {trainer: {prior: zeros}}
+dmax_0.25:    {model: {delta_max: 0.25}}
+dmax_1.0:     {model: {delta_max: 1.0}}
+dmax_2.0:     {model: {delta_max: 2.0}}

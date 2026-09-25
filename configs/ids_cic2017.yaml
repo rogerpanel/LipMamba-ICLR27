@@ -1,0 +1,66 @@
+# Network-intrusion-detection fine-tuning on CIC-IDS2017 (the deployment platform).
+seed: 42
+
+model:
+  variant: lipmamba_130m
+  vocab_size: 32          # discretised flow tokens (per the deployment platform quantiser)
+  n_layers: 12
+  d_model: 256
+  d_inner: 512
+  state_dim: 16
+  conv_kernel: 4
+  s_b: 1.0
+  s_c: 1.0
+  s_delta: 0.5
+  s_out: 1.0
+  delta_min: 1.0e-3
+  delta_max: 0.5
+  lambda_min: 0.05
+  lambda_max: 1.0
+  x_max: 1.0
+  n_power_iters: 1
+  n_classes: 15            # 14 attack categories + benign
+  s_head: 1.0
+  epsilon_train: 0.18
+
+dataset:
+  name: cicids2017
+  csv_path: data_cache/cicids2017_clean.parquet
+  label_col: Label
+  block_size: 64
+  batch_size: 256
+  num_workers: 8
+  standardise: true
+
+trainer:
+  max_steps: 50000
+  warmup_steps: 500
+  lr: 3.0e-4
+  weight_decay: 0.05
+  grad_clip: 1.0
+  epsilon_train: 0.18
+  log_every: 100
+  eval_every: 1000
+  save_every: 2000
+  out_dir: runs/lipmamba_ids_cic2017
+  use_margin_objective: true
+  use_attack: pgd
+  lipschitz_mode: local
+  local_lipschitz:
+    radius: 0.3
+    n_steps: 20
+    n_restarts: 8
+  seed: 42
+  attack_kwargs:
+    epsilon: 0.18
+    n_steps: 20
+
+pac_bayes:
+  delta: 0.05
+  sigma_post: 0.04
+  sigma_prior: 0.10
+  epsilon_train: 0.18
+  beta: 1.0
+  l_ell: 1.0
+  objective_half: true
+  n_train: 100000

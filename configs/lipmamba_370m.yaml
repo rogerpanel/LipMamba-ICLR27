@@ -1,0 +1,62 @@
+# LipMamba-370M reference config.
+seed: 42
+
+model:
+  variant: lipmamba_370m
+  vocab_size: 50280   # GPT-NeoX tokenizer (state-spaces/mamba-* base checkpoints)
+  n_layers: 48
+  d_model: 1024
+  d_inner: 2048
+  state_dim: 16
+  conv_kernel: 4
+  s_b: 1.0
+  s_c: 1.0
+  s_delta: 0.5
+  s_out: 1.0
+  delta_min: 1.0e-3
+  delta_max: 0.5
+  lambda_min: 0.05
+  lambda_max: 1.0
+  x_max: 1.0
+  n_power_iters: 1
+  n_classes: 0
+  s_head: 1.0
+  epsilon_train: 0.18
+
+dataset:
+  name: wikitext103
+  block_size: 1024
+  batch_size: 16
+  num_workers: 8
+  token_path: data_cache/wikitext103_train.bin
+  val_token_path: data_cache/wikitext103_val.bin
+
+trainer:
+  max_steps: 200000
+  warmup_steps: 2000
+  lr: 1.5e-4
+  weight_decay: 0.1
+  grad_clip: 1.0
+  epsilon_train: 0.18
+  log_every: 100
+  eval_every: 5000
+  save_every: 5000
+  out_dir: runs/lipmamba_370m
+  use_margin_objective: true
+  use_attack: null
+  lipschitz_mode: local      # local | global | fixed  (Remark 4)
+  local_lipschitz:
+    radius: 0.3
+    n_steps: 20
+    n_restarts: 8
+  seed: 42
+
+pac_bayes:
+  delta: 0.05
+  sigma_post: 0.04
+  sigma_prior: 0.10
+  epsilon_train: 0.18
+  beta: 1.0
+  l_ell: 1.0
+  objective_half: true
+  n_train: 200000

@@ -1,0 +1,19 @@
+# RoBench-25 hidden-state-poisoning attack evaluation.
+checkpoint: runs/lipmamba_130m/final.pt
+config: configs/lipmamba_130m.yaml
+
+dataset:
+  robench_path: data_cache/robench25.jsonl
+
+attack:
+  kind: hispa
+  trigger_length: 16
+  n_steps: 200
+  lr: 5.0e-2
+  norm_budget: 1.0
+  target_alpha: 0.05
+  init: gaussian
+
+reporting:
+  out_path: runs/lipmamba_130m/robench25_results.json
+  per_family: true

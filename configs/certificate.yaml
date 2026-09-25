@@ -1,0 +1,18 @@
+# Certified-radius / certified-accuracy evaluation.
+checkpoint: runs/lipmamba_130m/final.pt
+config: configs/lipmamba_130m.yaml
+
+eval:
+  radii: [0.04, 0.08, 0.12, 0.18, 0.24, 0.30]
+  out_path: runs/lipmamba_130m/certified.json
+  batch_size: 32
+
+immunity:
+  delta_min: 1.0e-3
+  lambda_min: 0.05
+  lambda_max: 1.0
+  s_b: 1.0
+  delta_max: 0.5
+  x_max: 1.0
+  h0_norm: 1.0
+  alpha: 0.5     # α_min retention threshold (Theorem 2)
