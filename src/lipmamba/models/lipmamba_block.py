@@ -44,6 +44,8 @@ class LipMambaBlockConfig:
     reparam_eigen: bool = True
     spectral_norm: bool = True
     sn_in_proj: bool = False   # True = "Naive SN" (every matrix); False = LipMamba-Arch
+    clip_input: bool = True
+    norm_type: str = "layer"   # "rms" = Mamba's RMSNorm (needed to load public Mamba checkpoints exactly)
 
     def ssm_config(self) -> SSMConfig:
         return SSMConfig(
@@ -53,15 +55,35 @@ class LipMambaBlockConfig:
             lambda_min=self.lambda_min, lambda_max=self.lambda_max, x_max=self.x_max,
             n_power_iters=self.n_power_iters, track_lipschitz=self.track_lipschitz,
             clamp_delta=self.clamp_delta, reparam_eigen=self.reparam_eigen,
-            spectral_norm=self.spectral_norm,
+            spectral_norm=self.spectral_norm, clip_input=self.clip_input,
         )
+
+
+class RMSNorm(nn.Module):
+    """Root-mean-square normalisation as used by the public Mamba checkpoints."""
+
+    def __init__(self, d_model: int, eps: float = 1e-5) -> None:
+        super().__init__()
+        self.eps = eps
+        self.weight = nn.Parameter(torch.ones(d_model))
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        return x * torch.rsqrt(x.pow(2).mean(-1, keepdim=True) + self.eps) * self.weight
+
+
+def make_norm(norm_type: str, d_model: int) -> nn.Module:
+    if norm_type == "rms":
+        return RMSNorm(d_model)
+    if norm_type == "layer":
+        return nn.LayerNorm(d_model)
+    raise ValueError(f"unknown norm_type {norm_type!r}")
 
 
 class LipMambaBlock(nn.Module):
     def __init__(self, cfg: LipMambaBlockConfig) -> None:
         super().__init__()
         self.cfg = cfg
-        self.norm = nn.LayerNorm(cfg.d_model)
+        self.norm = make_norm(cfg.norm_type, cfg.d_model)
         if cfg.spectral_norm and cfg.sn_in_proj:
             self.in_proj_x = SpectralNormLinear(cfg.d_model, cfg.d_inner, s=1.0, bias=False,
                                                 n_power_iters=cfg.n_power_iters)

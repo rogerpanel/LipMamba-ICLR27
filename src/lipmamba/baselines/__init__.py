@@ -27,9 +27,9 @@ def _base(**o) -> LipMambaConfig:
 
 def preset(name: str, **overrides) -> LipMambaConfig:
     if name == "unconstrained_mamba":
-        cfg = _base(spectral_norm=False, clamp_delta=False, reparam_eigen=False, gloro_head=False)
+        cfg = _base(spectral_norm=False, clamp_delta=False, reparam_eigen=False, gloro_head=False, clip_input=False)
     elif name == "gloro_mamba":
-        cfg = _base(spectral_norm=False, clamp_delta=False, reparam_eigen=False, gloro_head=True)
+        cfg = _base(spectral_norm=False, clamp_delta=False, reparam_eigen=False, gloro_head=True, clip_input=False)
     elif name == "naive_sn_mamba":
         cfg = _base(spectral_norm=True, clamp_delta=True, reparam_eigen=True, gloro_head=True,
                     sn_in_proj=True)

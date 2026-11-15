@@ -20,12 +20,11 @@
 | §5 Baselines (Mamba, GloRo-Mamba, Naive SN) | `baselines/__init__.py`; randomized smoothing `baselines/randomized_smoothing.py` |
 | §5 Attacks (Z-HiSPA, M-HiSPA, PGD-40; adaptive) | `attacks/hispa.py`, `attacks/pgd.py`, `attacks/adaptive_clamp.py` |
 | §5 Metrics (ACC, PACC, ASR, LL-Acc, ECE, latency; Friedman/Holm) | `evaluation/` |
-| Table 1 | `scripts/todo4_gloro_mamba_baseline.py` |
-| Fig. 2 | `scripts/todo5_fig2_lipschitz_depth.py` |
-| Fig. 3 (LL-Acc vs ε) | `evaluation/ll_acc.py` |
-| Fig. 3 (perplexity overhead) | `scripts/perplexity_overhead.py` |
-| Fig. 4 (HiSPA vs ℓ, shaded region) | `scripts/todo1_ell_star.py`, `scripts/todo2_adaptive_attack.py` |
-| Table 3 (ablation) | `configs/ablations.yaml`, `lipmamba.baselines.ablate` |
+| Table 2 and Appendix J (matched fine-tuning at 130M) | `scripts/scale_study.py`, `src/lipmamba/pretrained.py`; outputs in `paper/scale_study/` |
+| Tables 3-4 and Appendix K (controlled study from scratch) | `scripts/controlled_study.py`; outputs in `paper/controlled_study/` |
+| Harness, not used for results in the revised paper: baselines table | `scripts/todo4_gloro_mamba_baseline.py` |
+| Constant-versus-depth figure (appendix) | `scripts/todo5_fig2_lipschitz_depth.py`, `scripts/report_constants.py` |
+| Harness, not used for results in the revised paper | `evaluation/ll_acc.py`, `scripts/perplexity_overhead.py`, `scripts/todo1_ell_star.py`, `scripts/todo2_adaptive_attack.py`, `configs/ablations.yaml` |
 | Appendix A Algorithm 1 | `SelectiveSSM.forward` (D_t accumulator) |
 | Appendix B–D proofs | constants used in each step are named in `certificates/constants.py` docstrings |
 | Appendix E local estimator | `certificates/local_lipschitz.py` |

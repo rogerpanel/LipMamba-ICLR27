@@ -1,0 +1,196 @@
+{
+ "model": "mamba_at",
+ "arch": "mamba",
+ "adversarial_training": true,
+ "calibrated_constants": false,
+ "seed": 0,
+ "tiny": false,
+ "base": "state-spaces/mamba-130m-hf",
+ "args": {
+  "cmd": "run",
+  "model": "mamba_at",
+  "seed": 0,
+  "out": "/content/drive/MyDrive/lipmamba_scale_study/main/mamba_at_s0.json",
+  "preset": "a100",
+  "tiny": false,
+  "base": "state-spaces/mamba-130m-hf",
+  "revision": null,
+  "cache": "data_cache",
+  "bs": 16,
+  "accum": 1,
+  "grad_chunk": 16,
+  "eval_chunk": 256,
+  "steps": 400,
+  "n_eval": 64,
+  "iters": 60,
+  "n_cand": 32,
+  "lr": 0.0001,
+  "lm_weight": 0.5,
+  "lm_bs": 4,
+  "at_steps": 2,
+  "lengths": [
+   8,
+   16,
+   32
+  ],
+  "eval_fill": 24,
+  "n_clean": 256,
+  "ppl_chunks": 64,
+  "topk": 64,
+  "soft_steps": 20,
+  "x_max": null,
+  "x_max_quantile": 0.999,
+  "delta_quantile": 0.999,
+  "delta_headroom": 2.0,
+  "set": [],
+  "n_fact": 4,
+  "n_values": 16,
+  "log_every": 25,
+  "skip_attacks": false,
+  "skip_verify": false,
+  "keep_ckpt": false,
+  "force": false
+ },
+ "conversion_rel_error": 9.486952080560612e-15,
+ "conversion_rel_error_float32_vs_transformers": 0.0022094857413321733,
+ "conversion_next_token_agreement": 0.9955357313156128,
+ "torch": "2.14.1+cu130",
+ "device": "NVIDIA A100-SXM4-40GB",
+ "n_names": 12,
+ "n_values": 16,
+ "allowed_trigger_tokens": 50192,
+ "init": {
+  "clean_acc": 0.2578125,
+  "update_acc": 0.19140625,
+  "ppl": 26.43880563906306
+ },
+ "train_log": [
+  {
+   "step": 25,
+   "loss": 1.7816252487897872,
+   "acc": 0.5475,
+   "lm_loss": 3.7707956314086912,
+   "seconds": 15.806978225708008
+  },
+  {
+   "step": 50,
+   "loss": 0.04598695552849676,
+   "acc": 0.9925,
+   "lm_loss": 3.482295637130737,
+   "seconds": 31.0325608253479
+  },
+  {
+   "step": 75,
+   "loss": 0.007372293017397169,
+   "acc": 0.9975,
+   "lm_loss": 3.3560878086090087,
+   "seconds": 46.52714657783508
+  },
+  {
+   "step": 100,
+   "loss": 0.044163015929807446,
+   "acc": 0.9925,
+   "lm_loss": 3.3247574043273924,
+   "seconds": 61.927649974823
+  },
+  {
+   "step": 125,
+   "loss": 0.06359764900422306,
+   "acc": 0.99,
+   "lm_loss": 3.391031322479248,
+   "seconds": 87.19469165802002
+  },
+  {
+   "step": 150,
+   "loss": 0.0038228927044110603,
+   "acc": 0.9975,
+   "lm_loss": 3.22170597076416,
+   "seconds": 111.75451016426086
+  },
+  {
+   "step": 175,
+   "loss": 0.003090790620990447,
+   "acc": 1.0,
+   "lm_loss": 3.3117428684234618,
+   "seconds": 137.62062406539917
+  },
+  {
+   "step": 200,
+   "loss": 0.00012428089117747732,
+   "acc": 1.0,
+   "lm_loss": 3.288786506652832,
+   "seconds": 163.51973676681519
+  },
+  {
+   "step": 225,
+   "loss": 0.005859963649272686,
+   "acc": 0.9975,
+   "lm_loss": 3.2376374435424804,
+   "seconds": 189.53728890419006
+  },
+  {
+   "step": 250,
+   "loss": 0.001307561464709579,
+   "acc": 1.0,
+   "lm_loss": 3.281237163543701,
+   "seconds": 214.97851657867432
+  },
+  {
+   "step": 275,
+   "loss": 5.1225859569967726e-05,
+   "acc": 1.0,
+   "lm_loss": 3.284202365875244,
+   "seconds": 239.2727370262146
+  },
+  {
+   "step": 300,
+   "loss": 3.9228409732459114e-05,
+   "acc": 1.0,
+   "lm_loss": 3.253906478881836,
+   "seconds": 265.0873062610626
+  },
+  {
+   "step": 325,
+   "loss": 0.0001896435754315462,
+   "acc": 1.0,
+   "lm_loss": 3.288648748397827,
+   "seconds": 290.14365553855896
+  },
+  {
+   "step": 350,
+   "loss": 3.239305999159114e-05,
+   "acc": 1.0,
+   "lm_loss": 3.2189598178863523,
+   "seconds": 315.3351204395294
+  },
+  {
+   "step": 375,
+   "loss": 0.003132926692487672,
+   "acc": 0.9975,
+   "lm_loss": 3.28896222114563,
+   "seconds": 341.24422311782837
+  },
+  {
+   "step": 400,
+   "loss": 0.00015504241146118146,
+   "acc": 1.0,
+   "lm_loss": 3.292548599243164,
+   "seconds": 365.84364128112793
+  }
+ ],
+ "config": {
+  "params": 182220288,
+  "n_layers": 24,
+  "d_model": 768,
+  "spectral_norm": false,
+  "clamp_delta": false,
+  "reparam_eigen": false,
+  "clip_input": false
+ },
+ "train_seconds": 404.88471722602844,
+ "final": {
+  "clean_acc": 1.0,
+  "update_acc": 1.0,
+  "ppl": 17.658735153085907
+ }
+}

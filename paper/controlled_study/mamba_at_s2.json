@@ -1,0 +1,168 @@
+{
+ "clean_acc": {
+  "0": 1.0,
+  "8": 1.0,
+  "16": 1.0
+ },
+ "update_acc": {
+  "0": 1.0,
+  "8": 1.0,
+  "16": 1.0
+ },
+ "attacks": {
+  "2": {
+   "acc_random8": 1.0,
+   "acc_zero_shot": 1.0,
+   "acc_gcg_margin": 1.0,
+   "acc_gcg_norm": 1.0,
+   "acc_soft_margin": 0.65625,
+   "acc_soft_norm": 1.0,
+   "pacc_token_worst": 1.0,
+   "pacc_worst": 0.65625,
+   "asr_token": 0.0,
+   "asr": 0.34375,
+   "retention_token_mean": [
+    0.966149628162384,
+    0.7044362425804138
+   ],
+   "retention_token_min": [
+    0.6420671343803406,
+    0.2125440388917923
+   ],
+   "retention_soft_mean": [
+    0.9547650814056396,
+    0.2620181739330292
+   ],
+   "retention_soft_min": [
+    0.6298913955688477,
+    0.08291705697774887
+   ],
+   "delta_token": [
+    0.6112075448036194,
+    0.7139600515365601
+   ],
+   "delta_soft": [
+    0.6152631044387817,
+    0.7083455324172974
+   ]
+  },
+  "4": {
+   "acc_random8": 1.0,
+   "acc_zero_shot": 1.0,
+   "acc_gcg_margin": 1.0,
+   "acc_gcg_norm": 1.0,
+   "acc_soft_margin": 0.1640625,
+   "acc_soft_norm": 1.0,
+   "pacc_token_worst": 1.0,
+   "pacc_worst": 0.1640625,
+   "asr_token": 0.0,
+   "asr": 0.8359375,
+   "retention_token_mean": [
+    0.9078298211097717,
+    0.3563353419303894
+   ],
+   "retention_token_min": [
+    0.5496199131011963,
+    0.10571646690368652
+   ],
+   "retention_soft_mean": [
+    0.9052180647850037,
+    0.10220661759376526
+   ],
+   "retention_soft_min": [
+    0.524254560470581,
+    0.02939392812550068
+   ],
+   "delta_token": [
+    0.5889948010444641,
+    0.7098568677902222
+   ],
+   "delta_soft": [
+    0.5904886722564697,
+    0.707074761390686
+   ]
+  },
+  "8": {
+   "acc_random8": 1.0,
+   "acc_zero_shot": 1.0,
+   "acc_gcg_margin": 1.0,
+   "acc_gcg_norm": 1.0,
+   "acc_soft_margin": 0.03125,
+   "acc_soft_norm": 1.0,
+   "pacc_token_worst": 1.0,
+   "pacc_worst": 0.03125,
+   "asr_token": 0.0,
+   "asr": 0.96875,
+   "retention_token_mean": [
+    0.7848416566848755,
+    0.3066595196723938
+   ],
+   "retention_token_min": [
+    0.5010620951652527,
+    0.09730605781078339
+   ],
+   "retention_soft_mean": [
+    0.6723799705505371,
+    0.02614760771393776
+   ],
+   "retention_soft_min": [
+    0.3167363107204437,
+    0.0070226360112428665
+   ],
+   "delta_token": [
+    0.5761069059371948,
+    0.7084961533546448
+   ],
+   "delta_soft": [
+    0.584250271320343,
+    0.7039217352867126
+   ]
+  },
+  "16": {
+   "acc_random8": 1.0,
+   "acc_zero_shot": 1.0,
+   "acc_gcg_margin": 1.0,
+   "acc_gcg_norm": 1.0,
+   "acc_soft_margin": 0.0,
+   "acc_soft_norm": 0.9921875,
+   "pacc_token_worst": 1.0,
+   "pacc_worst": 0.0,
+   "asr_token": 0.0,
+   "asr": 1.0,
+   "retention_token_mean": [
+    0.5999875664710999,
+    0.40798503160476685
+   ],
+   "retention_token_min": [
+    0.3518814146518707,
+    0.09528704732656479
+   ],
+   "retention_soft_mean": [
+    0.489270955324173,
+    0.01583714596927166
+   ],
+   "retention_soft_min": [
+    0.18250703811645508,
+    0.004278108011931181
+   ],
+   "delta_token": [
+    0.5716797709465027,
+    0.7113317251205444
+   ],
+   "delta_soft": [
+    0.5800320506095886,
+    0.70566725730896
+   ]
+  }
+ },
+ "theory": {
+  "rho_min": 0.6065306597126334,
+  "c": 0.5,
+  "constrained": false
+ },
+ "model": "mamba_at",
+ "seed": 2,
+ "steps": 3000,
+ "seconds": 1193.483516216278,
+ "params": 95266
+}

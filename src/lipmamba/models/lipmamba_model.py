@@ -9,7 +9,7 @@ import torch.nn as nn
 
 from ..certificates.constants import ConstraintSet
 from .glorot_head import GloroNetHead
-from .lipmamba_block import LipMambaBlock, LipMambaBlockConfig
+from .lipmamba_block import LipMambaBlock, LipMambaBlockConfig, make_norm
 
 
 @dataclass
@@ -51,7 +51,9 @@ class LipMambaConfig:
     reparam_eigen: bool = True
     spectral_norm: bool = True
     sn_in_proj: bool = False
+    clip_input: bool = True
     gloro_head: bool = True
+    norm_type: str = "layer"
 
     # heads
     n_classes: int = 0
@@ -80,7 +82,7 @@ class LipMambaConfig:
             n_power_iters=self.n_power_iters, track_lipschitz=self.track_lipschitz,
             residual=self.residual, clamp_delta=self.clamp_delta,
             reparam_eigen=self.reparam_eigen, spectral_norm=self.spectral_norm,
-            sn_in_proj=self.sn_in_proj,
+            sn_in_proj=self.sn_in_proj, clip_input=self.clip_input, norm_type=self.norm_type,
         )
 
     def constraints(self) -> ConstraintSet:
@@ -93,7 +95,7 @@ class LipMambaModel(nn.Module):
         self.cfg = cfg
         self.embed_tokens = nn.Embedding(cfg.vocab_size, cfg.d_model)
         self.blocks = nn.ModuleList(LipMambaBlock(cfg.block_config()) for _ in range(cfg.n_layers))
-        self.norm_f = nn.LayerNorm(cfg.d_model)
+        self.norm_f = make_norm(cfg.norm_type, cfg.d_model)
         self.lm_head = nn.Linear(cfg.d_model, cfg.vocab_size, bias=False)
         self.lm_head.weight = self.embed_tokens.weight
         if cfg.n_classes > 0:

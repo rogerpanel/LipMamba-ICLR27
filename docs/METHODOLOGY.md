@@ -50,11 +50,12 @@ Implementation: `training/trainer.py` (`lipschitz_mode`), `training/pac_objectiv
 * three seeds {42, 137, 2026}; Friedman over methods × seeds, Holm post-hoc,
   Wilcoxon with rank-biserial r.
 
-Scripts: `todo4_gloro_mamba_baseline.py` (Table 1 rows + stats),
-`todo2_adaptive_attack.py` (adaptive column), `todo1_ell_star.py` (Fig. 4),
-`todo5_fig2_lipschitz_depth.py` (Fig. 2), `perplexity_overhead.py` (Fig. 3).
+Scripts of this harness: `todo4_gloro_mamba_baseline.py`, `todo2_adaptive_attack.py`,
+`todo1_ell_star.py`, `todo5_fig2_lipschitz_depth.py`, `perplexity_overhead.py`.
+The revised paper's results come from `scale_study.py` and `controlled_study.py`
+(see `docs/REPRODUCIBILITY.md`).
 
-## Ablations (Table 3)
+## Ablations
 
 Configuration presets in `configs/ablations.yaml` / `lipmamba.baselines.ablate`:
 no spectral norm, no clamp (vanilla softplus), free A, no GloRo head, no

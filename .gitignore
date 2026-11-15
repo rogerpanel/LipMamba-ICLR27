@@ -1,0 +1,32 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+.env
+
+# Run artifacts
+runs/
+checkpoints/
+wandb/
+logs/
+*.pt
+*.ckpt
+*.bin
+*.safetensors
+
+# Datasets (downloaded locally, do not commit)
+data_cache/
+datasets/
+
+# Editor
+.idea/
+.vscode/
+*.swp
+
+# Coverage
+.coverage
+.htmlcov/
+.pytest_cache/
